@@ -1,0 +1,187 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  min-width: 320px;
+  min-height: 100vh;
+  background: #fff;
+  color: #222;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
+}
+
+.wrapper {
+  display: flex;
+  position: relative;
+}
+.bannerTop {
+  background: url('../assets/images/bannerImage.jpg');
+  width: 100%;
+  height: 50px;
+  background-size: cover;
+  background-position: top center;
+  background-blend-mode: multiply;
+  background-color: #bcbcbc;
+  border-radius: 15px;
+  margin-bottom: 30px;
+  margin-top: 3px;
+  align-items: center;
+}
+
+.bannerTop::after {
+  content: 'Aconsegeix la millor qualitat';
+  top: 10px;
+  left: 100px;
+  width: 300px;
+  font-size: 30px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.shop-cart-icon {
+  float:left;
+  cursor: pointer;
+  transition: 500ms ease;
+  
+}
+
+.shop-cart-icon:hover{
+  transform: scale(1.50);
+  color: red;
+}
+
+.shop-cart-icon.active {
+  color: red;
+}
+
+.cart-content {
+  position: absolute;
+  top:30px;
+  right: 0px;
+  width: 450px;
+  min-height: 100px;
+  background: #646cff;
+  -webkit-box-shadow: 15px 12px 27px 1px rgba(0,0,0,0.53);
+  -moz-box-shadow: 15px 12px 27px 1px rgba(0,0,0,0.53);
+  box-shadow: 15px 12px 27px 1px rgba(0,0,0,0.53);
+  z-index: 1000;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
+
+.card {
+  background-color: #f8f9fa;
+  display: flex;
+  text-align: left;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 15px;
+  width: 600px;
+  height: 50px;
+  margin-bottom: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.description {
+  font-size: 15px;
+  color: blue;
+  padding-top: 2px;
+}
+
+.h2 {
+  margin-bottom: 2px;
+}
+
+
+.websupplements {
+  width: 670px;
+  text-align: right;
+  
+
+}
+
+.websupplements p{
+  display: inline;
+  font-size: 10px;
+}
+
+.websupplements button{
+  border-radius: 100%;
+  font:  8px;
+  background-color: white;
+  
+}
+
+.websupplements input{
+  width: 20px;
+  font-size: 10px;
+  font-style:italic ;
+}
+
+.websupplements button a:hover{
+  outline: none;
+}
+
+
+/* ---------Welcome Page-------- */
+.welcTitle{
+  color: rgba(96, 99, 206, 0.84);
+  font-size: large;
+}
+
+.welcParag{
+  margin:25px;
+  padding-top: 25px;
+}
+
+.welcomePage{
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.welcomePage:hover{
+  transform: scale(1.10);
+  background: red;
+}
