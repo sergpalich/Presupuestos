@@ -3,7 +3,7 @@ import HeaderBanner from "./components/HeaderBanner";
 import CheckBox from "./components/CheckBox";
 import { Routes, Route } from "react-router-dom";
 import WelcomePage from "./components/WelcomePage";
-import { Link } from "react-router-dom";
+
 
 function App() {
   const offers = [

@@ -2,6 +2,7 @@ import Card from "react-bootstrap/Card";
 import Form from "react-bootstrap/Form";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { FaCartPlus } from "react-icons/fa";
 
 const CheckBox = ({ offers }) => {
   const [services, setServices] = useState({
@@ -15,32 +16,31 @@ const CheckBox = ({ offers }) => {
     languages: 1,
   });
 
+  let [cartOpen, setCartOpen] = useState(false);
   const [selectedOffers, setSelectedOffers] = useState([]);
-  const [totalPrice, setTotalPrice] = useState(0); 
+  const [totalPrice, setTotalPrice] = useState(0);
 
   const addService = (id, isSelected) => {
-    const selectedOffer = offers.find(offer => offer.id === id);
+    const selectedOffer = offers.find((offer) => offer.id === id);
     setSelectedOffers((prevSelectedOffers) => {
       if (isSelected) {
         // Solo agrega si no está ya en la lista
         if (!prevSelectedOffers.includes(id)) {
-          setTotalPrice(prevTotal => prevTotal + selectedOffer.price);
+          setTotalPrice((prevTotal) => prevTotal + selectedOffer.price);
           return [...prevSelectedOffers, id];
         }
       } else {
         // Solo elimina si está en la lista
         if (prevSelectedOffers.includes(id)) {
-          setTotalPrice(prevTotal => prevTotal - selectedOffer.price);
-          return prevSelectedOffers.filter(offerId => offerId !== id);
-        } 
+          setTotalPrice((prevTotal) => prevTotal - selectedOffer.price);
+          return prevSelectedOffers.filter((offerId) => offerId !== id);
+        }
       }
 
       return prevSelectedOffers;
-      
-
     });
-  };  
-  
+  };
+
   const handleCheckboxChange = (id) => {
     const selectedOffer = offers.find((offer) => offer.id === id);
     setServices((prevServices) => {
@@ -57,7 +57,6 @@ const CheckBox = ({ offers }) => {
     });
   };
 
-
   const handleWebDetailChange = (type, value) => {
     setWebDetails({ ...webDetails, [type]: value });
   };
@@ -67,7 +66,6 @@ const CheckBox = ({ offers }) => {
       ...prevDetails,
       [type]: prevDetails[type] + 1,
     }));
- 
   };
 
   const decrement = (type) => {
@@ -75,23 +73,24 @@ const CheckBox = ({ offers }) => {
       ...prevDetails,
       [type]: Math.max(1, prevDetails[type] - 1),
     }));
-    
   };
 
-  let [suplWeb,setSuplWeb] = useState(0)
+  let [suplWeb, setSuplWeb] = useState(0);
 
-  const takeSuplWeb = () =>  {
-    if (services.web){
-      setSuplWeb((webDetails.pages + webDetails.languages)*30)
+  const takeSuplWeb = () => {
+    if (services.web) {
+      setSuplWeb((webDetails.pages + webDetails.languages) * 30);
       return setSuplWeb;
     } else {
-      suplWeb === 0
-    }}
-
+      suplWeb === 0;
+    }
+  };
 
   return (
     <div>
-      <Link to={"/"} ><button className="welcomePage">Welcome</button></Link>
+      <Link to={"/"}>
+        <button className="welcomePage">Welcome</button>
+      </Link>
       <div className="card-container">
         {offers.map((offer, index) => (
           <Card className="card" key={index}>
@@ -129,7 +128,7 @@ const CheckBox = ({ offers }) => {
                 handleWebDetailChange("pages", Number(e.target.value))
               }
             />
-            
+
             <button onClick={() => increment("pages")}>+</button>
           </div>
           <div>
@@ -145,19 +144,45 @@ const CheckBox = ({ offers }) => {
               }
             />
             <button onClick={() => increment("languages")}>+</button>
-            
           </div>
         </div>
       )}
-      
+
       <div>
         <h2 style={{ textAlign: "end", width: "664px" }}>
-          Preu pressuposat {totalPrice + suplWeb}  €
+          Preu pressuposat {totalPrice + suplWeb} €
         </h2>
       </div>
+
+      <button className="welcomePage offer"
+        onClick={() => setCartOpen((cartOpen = !cartOpen))}>Ask an offer</button>
+      {cartOpen && (
+      <div className="offerForm">
+        <h2>Demanar presupuesto</h2>
+        <input
+        type="text"
+        placeholder="Name"
+        value=""
+        className="userData"
+      />
+      <input
+        type="text"
+        placeholder="Last Name"
+        value=""
+        className="userData"
+      />
+      <input
+        type="text"
+        placeholder="Email"
+        value=""
+        className="userData"
+      />
+      <button className="welcomePage-solicitar">Solicitar pressupost</button>
+      </div>
+
+        )}
     </div>
   );
 };
-
 
 export default CheckBox;

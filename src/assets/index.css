@@ -51,7 +51,7 @@ body {
 }
 
 .shop-cart-icon:hover{
-  transform: scale(1.50);
+  transform: scale(1.1);
   color: red;
 }
 
@@ -185,3 +185,15 @@ button:focus-visible {
   transform: scale(1.10);
   background: red;
 }
+
+/* ---------Offer form-------- */
+.userData{
+  margin: 3px;
+  width: 150px;
+  
+}
+
+.welcomePage-solicitar{
+  background-color: rgb(97, 224, 97);
+}
+
