@@ -1,8 +1,5 @@
-# React + Vite
+1. Es una pagina de gererar el presupuesto de servicio web
+2. En la pagina puedes escoger las servicios de Ads, Seo o Web Dev que incluye differentes paginas y languages.
+3. Desùes de escoger servicios necesarios usuario puede formalizar la propuesta y enviarla a su direccio de correo electronico
+4. Se puede generar varias propuestas en el mismo momento
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh

@@ -1,8 +1,8 @@
 import Card from "react-bootstrap/Card";
 import Form from "react-bootstrap/Form";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { FaCartPlus } from "react-icons/fa";
+import OfferForm from "./OfferForm";
 
 const CheckBox = ({ offers }) => {
   const [services, setServices] = useState({
@@ -10,15 +10,30 @@ const CheckBox = ({ offers }) => {
     ads: false,
     web: false,
   });
-
+  /* ---------- Establece la lista con servicios add de Web y su estado inicial -------*/
   const [webDetails, setWebDetails] = useState({
     pages: 1,
     languages: 1,
   });
 
-  let [cartOpen, setCartOpen] = useState(false);
+  /* ---------- Establece la lista de offertas escogidas y su estado inicial -------*/
   const [selectedOffers, setSelectedOffers] = useState([]);
+  /* ---------- Establece precio total y su estado inicial -------*/
   const [totalPrice, setTotalPrice] = useState(0);
+
+
+  useEffect(() => {
+    let suplemento =
+      services.web && (webDetails.pages + webDetails.languages) * 30;
+    let total =
+      (services.web && 500) + 
+      (services.seo && 300) +
+      (services.ads && 400) +
+      suplemento;
+
+
+    setTotalPrice(total);
+  }, [services, webDetails]);
 
   const addService = (id, isSelected) => {
     const selectedOffer = offers.find((offer) => offer.id === id);
@@ -73,17 +88,6 @@ const CheckBox = ({ offers }) => {
       ...prevDetails,
       [type]: Math.max(1, prevDetails[type] - 1),
     }));
-  };
-
-  let [suplWeb, setSuplWeb] = useState(0);
-
-  const takeSuplWeb = () => {
-    if (services.web) {
-      setSuplWeb((webDetails.pages + webDetails.languages) * 30);
-      return setSuplWeb;
-    } else {
-      suplWeb === 0;
-    }
   };
 
   return (
@@ -150,37 +154,13 @@ const CheckBox = ({ offers }) => {
 
       <div>
         <h2 style={{ textAlign: "end", width: "664px" }}>
-          Preu pressuposat {totalPrice + suplWeb} €
+          Preu pressuposat {totalPrice} €
         </h2>
       </div>
-
-      <button className="welcomePage offer"
-        onClick={() => setCartOpen((cartOpen = !cartOpen))}>Ask an offer</button>
-      {cartOpen && (
-      <div className="offerForm">
-        <h2>Demanar presupuesto</h2>
-        <input
-        type="text"
-        placeholder="Name"
-        value=""
-        className="userData"
-      />
-      <input
-        type="text"
-        placeholder="Last Name"
-        value=""
-        className="userData"
-      />
-      <input
-        type="text"
-        placeholder="Email"
-        value=""
-        className="userData"
-      />
-      <button className="welcomePage-solicitar">Solicitar pressupost</button>
-      </div>
-
-        )}
+      
+      {(services.web || services.ads || services.seo) && (
+        <OfferForm totalPrice={totalPrice} services={services} prevSelectedOffers={selectedOffers} offers={offers} webdetails={webDetails}/>
+      )}
     </div>
   );
 };

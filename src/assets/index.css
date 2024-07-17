@@ -187,6 +187,17 @@ button:focus-visible {
 }
 
 /* ---------Offer form-------- */
+.offerForm{
+  margin-top: 30px;
+}
+
+.offerForm h2 {
+  text-align: left;
+  padding-left: 20px;
+  font-size: medium;
+  margin-bottom: 10px;
+}
+
 .userData{
   margin: 3px;
   width: 150px;
@@ -195,5 +206,62 @@ button:focus-visible {
 
 .welcomePage-solicitar{
   background-color: rgb(97, 224, 97);
+  width: 150px;
+  font-size: x-small;
 }
 
+.formSaved {
+  display: flex;
+  margin-top: 20px;
+  border-top: #1a1a1a;
+  justify-content: space-around;
+}
+
+.formSaved .clientDetails{
+  margin-top: 5px;
+  text-align: left;
+
+}
+
+.nameResult{
+  font-size: medium;
+  font-weight: bold;
+}
+
+.phoneResult {
+  font-size: x-small;
+  padding-top: 2px;
+} 
+.emailAdrResult{
+  padding-top: 2px;
+  font-size: x-small;
+}
+
+.formSavedTitle {
+  padding-top: 20px;
+  margin-top: 20px;
+  display: flex;
+  border-top: dashed;
+  border-width: 0.05rem;
+  padding-left: 10px;
+  justify-content:space-between;
+  align-items: center;
+}
+
+.formSavedTitleIcons{
+  display: flex;
+  margin-top: 30px;
+  gap: 10px;
+  font-size: x-small;
+  
+
+}
+
+.clientServiceDetails.serviceChoosen {
+  align-items: left;
+  
+}
+
+.finalList {
+  font-size: 10px;
+}
