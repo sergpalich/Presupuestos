@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 
-const OfferForm = ({ totalPrice, services, webDetails}) => {
+const OfferForm = ({ totalPrice, services}) => {
   const [isSaved, setIsSaved] = useState(false);
   const [userName, setUserName] = useState("");
   const [userPhone, setUserPhone] = useState("");
   const [userEmail, setUserEmail] = useState("");
- 
+  
 
   function savePressupost() {
     let userName = document.querySelector("#name").value;

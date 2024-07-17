@@ -20,20 +20,22 @@ const CheckBox = ({ offers }) => {
   const [selectedOffers, setSelectedOffers] = useState([]);
   /* ---------- Establece precio total y su estado inicial -------*/
   const [totalPrice, setTotalPrice] = useState(0);
-
+  const [applyDiscount, setApplyDiscount] = useState(false);
 
   useEffect(() => {
     let suplemento =
       services.web && (webDetails.pages + webDetails.languages) * 30;
     let total =
-      (services.web && 500) + 
+      (services.web && 500) +
       (services.seo && 300) +
       (services.ads && 400) +
       suplemento;
 
-
+    if (applyDiscount) {
+      total *= 0.8; // Aplicar 20% de descuento
+    }
     setTotalPrice(total);
-  }, [services, webDetails]);
+  }, [services, webDetails, applyDiscount]);
 
   const addService = (id, isSelected) => {
     const selectedOffer = offers.find((offer) => offer.id === id);
@@ -90,11 +92,25 @@ const CheckBox = ({ offers }) => {
     }));
   };
 
+  const toggleDiscount = () => {
+    setApplyDiscount((prev) => !prev);
+  };
+
   return (
     <div>
-      <Link to={"/"}>
-        <button className="welcomePage">Welcome</button>
-      </Link>
+      <div>
+        <Link to={"/"}>
+          <button className="welcomePage">Welcome</button>
+        </Link>
+        <label className="switch">
+            <input
+              type="checkbox"
+              checked={applyDiscount}
+              onChange={toggleDiscount}
+            />
+            <span className="slider round">Pagament anual</span>
+        </label>
+      </div>
       <div className="card-container">
         {offers.map((offer, index) => (
           <Card className="card" key={index}>
@@ -105,7 +121,9 @@ const CheckBox = ({ offers }) => {
               </p>
             </div>
             <div>
-              <h2 className="price">{offer.price} €</h2>
+              <h2 className="price">
+                {applyDiscount ? (offer.price * 80) / 100 : offer.price}{" "}
+              </h2>
             </div>
             <Form>
               <Form.Check
@@ -157,9 +175,15 @@ const CheckBox = ({ offers }) => {
           Preu pressuposat {totalPrice} €
         </h2>
       </div>
-      
+
       {(services.web || services.ads || services.seo) && (
-        <OfferForm totalPrice={totalPrice} services={services} prevSelectedOffers={selectedOffers} offers={offers} webdetails={webDetails}/>
+        <OfferForm
+          totalPrice={totalPrice}
+          services={services}
+          prevSelectedOffers={selectedOffers}
+          offers={offers}
+          
+        />
       )}
     </div>
   );
