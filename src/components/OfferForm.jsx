@@ -6,6 +6,8 @@ const OfferForm = ({ totalPrice, services}) => {
   const [userName, setUserName] = useState("");
   const [userPhone, setUserPhone] = useState("");
   const [userEmail, setUserEmail] = useState("");
+  /* nuevo*/
+  const [pressuposts, setPressuposts] = useState([]);
   
 
   function savePressupost() {
@@ -13,25 +15,29 @@ const OfferForm = ({ totalPrice, services}) => {
     let userPhone = document.querySelector("#phone").value;
     let userEmail = document.querySelector("#emailAdr").value;
 
-    setUserName(userName);
-    setUserPhone(userPhone);
-    setUserEmail(userEmail);
+    /* nuevo*/
+    const newOffer = {
+      userName:  userName,
+      userPhone: userPhone,
+      userEmail: userEmail,
+      totalPrice: totalPrice,
+      services: {...services}
+
+    };
+
+    setPressuposts([...pressuposts, newOffer])
     setIsSaved(true);
-    console.log(isSaved);
+    console.log(newOffer);
   }
 
-  
-
-
-  const isSavedOptions = [services.web, services.ads, services.seo];
-  const renderFormSaved = (type) => (
-    <div className="formSaved">
-      <div className="clientDetails">
-        <div className="nameResult">{userName} </div>
-        <div className="phoneResult">{userPhone}</div>
-        <div className="emailAdrResult">{userEmail}</div>
-      </div>
-
+      const renderPressupost = (pressupost, index) => (
+        <div key={index.id} className="formSaved">
+          <div className="clientDetails">
+            <div className="nameResult">{pressupost.userName}</div>
+            <div className="phoneResult">{pressupost.userPhone}</div>
+            <div className="emailAdrResult">{pressupost.userEmail}</div>
+          </div>
+          
       <div className="clientServiceDetails">
         <div className="servicesChoosen">
             {services.web &&  (<div>Web</div>)} 
@@ -43,7 +49,7 @@ const OfferForm = ({ totalPrice, services}) => {
       </div>
       <div>
         <div className="totalField">total</div>
-        <div className="">{totalPrice}</div>
+        <div className="">{pressupost.totalPrice}</div>
       </div>
     </div>
   );
@@ -77,7 +83,8 @@ const OfferForm = ({ totalPrice, services}) => {
             </div>
           </div>
           <div>
-            {isSavedOptions.includes(isSaved) && renderFormSaved(isSaved)}
+          {pressuposts.map((pressupost, index) => renderPressupost(pressupost, index))}
+          {/*   {isSavedOptions.includes(isSaved) && renderFormSaved(isSaved)} */}
           </div>
         </>
       )}
