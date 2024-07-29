@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 
-const OfferForm = ({ totalPrice, services}) => {
+const OfferForm = ({ totalPrice, services, webDetails}) => {
   const [isSaved, setIsSaved] = useState(false);
   const [userName, setUserName] = useState("");
   const [userPhone, setUserPhone] = useState("");
   const [userEmail, setUserEmail] = useState("");
   /* nuevo*/
   const [pressuposts, setPressuposts] = useState([]);
+  
   
 
   function savePressupost() {
@@ -21,14 +22,17 @@ const OfferForm = ({ totalPrice, services}) => {
       userPhone: userPhone,
       userEmail: userEmail,
       totalPrice: totalPrice,
-      services: {...services}
+      services: services,
+      webDetails: webDetails,
 
     };
 
     setPressuposts([...pressuposts, newOffer])
     setIsSaved(true);
     console.log(newOffer);
+    
   }
+  
 
       const renderPressupost = (pressupost, index) => (
         <div key={index.id} className="formSaved">
@@ -39,12 +43,13 @@ const OfferForm = ({ totalPrice, services}) => {
           </div>
           
       <div className="clientServiceDetails">
-        <div className="servicesChoosen">
-            {services.web &&  (<div>Web</div>)} 
-            {services.web &&  (<div className="finalList">* Pages</div>)}
-            {services.web &&  (<div className="finalList">* Languages</div>)}
-            {services.ads && (<div>Ads</div>)}
-            {services.seo && (<div>Seo</div>)}
+        <div className="servicesChoosen">  
+            
+            {pressupost.services.web &&  (<div>Web</div>)} 
+            {pressupost.services.web &&  (<div className="finalList">* Pages</div>)}
+            {pressupost.services.web &&  (<div className="finalList">* Languages</div>)}
+            {pressupost.services.ads && (<div>Ads</div>)}
+            {pressupost.services.seo && (<div>Seo</div>)}
         </div>
       </div>
       <div>
@@ -84,7 +89,6 @@ const OfferForm = ({ totalPrice, services}) => {
           </div>
           <div>
           {pressuposts.map((pressupost, index) => renderPressupost(pressupost, index))}
-          {/*   {isSavedOptions.includes(isSaved) && renderFormSaved(isSaved)} */}
           </div>
         </>
       )}

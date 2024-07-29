@@ -182,6 +182,7 @@ const CheckBox = ({ offers }) => {
           services={services}
           prevSelectedOffers={selectedOffers}
           offers={offers}
+          webDetails={webDetails}
           
         />
       )}
